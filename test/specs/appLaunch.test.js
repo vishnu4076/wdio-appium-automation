@@ -63,6 +63,9 @@ describe('Guest User Flow', () => {
         // -------------------------
 
         await StorePage.confirm();
+        await StorePage.clickConfirmToStore();
+        await StorePage.subscribeToStore("Marsdon's Kitchen");
+
 
     });
 

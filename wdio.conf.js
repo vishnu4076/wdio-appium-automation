@@ -18,6 +18,8 @@ exports.config = {
         'appium:deviceName': 'emulator-5554',
         'appium:platformVersion': '17.0',
         'appium:fullReset': true,
+        'appium:newCommandTimeout': 120,
+        'appium:appWaitDuration': 30000,
         'appium:app': 'C:\\Users\\vishnu\\Documents\\apk\\LokbestWithTestIDs.apk'
     }],
 

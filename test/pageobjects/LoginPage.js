@@ -36,6 +36,8 @@ class LoginPage extends BasePage {
 
     async clickContinue() {
         await this.clickElement(this.continueButton);
+        // Wait for the password field to be displayed before proceeding
+        await this.passwordInput.waitForDisplayed({ timeout: 20000 });
     }
 
     async enterPassword(password) {

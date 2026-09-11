@@ -18,14 +18,19 @@ class CountryPickerPage extends BasePage {
 
     async openCountryPicker() {
         await this.waitForElement(this.welcomeTitle, 10000);
+        await browser.pause(2000); // Let Welcome screen transition finish
         await this.clickElement(this.countryPicker);
-        await browser.pause(1500); // Wait for country list modal to open
+        await browser.pause(2000); // Let country list modal open
     }
 
     async selectCountry(countryName) {
         const country = this.getCountry(countryName);
-        await country.click();
+        // Wait for the country element to be present after scrolling
+        await country.waitForExist({ timeout: 20000 });
+        await this.clickElement(country, 15000);
     }
+
+
 }
 
 module.exports = new CountryPickerPage();

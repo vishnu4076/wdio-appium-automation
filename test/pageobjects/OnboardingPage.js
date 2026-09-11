@@ -26,11 +26,17 @@ class OnboardingPage extends BasePage {
 
     // Actions
     async selectEnglish() {
-        await this.clickElement(this.englishButton);
+        await this.clickElement(this.englishButton, 20000);
     }
 
     async clickSelect() {
-        await this.clickElement(this.selectButton);
+        try {
+            await this.clickElement(this.selectButton, 10000);
+        } catch (e) {
+            // Fallback: try locating the Select button by visible text
+            const altSelect = $('android=new UiSelector().text("Select")');
+            await this.clickElement(altSelect, 10000);
+        }
     }
 
     async clickIntroContinue() {
