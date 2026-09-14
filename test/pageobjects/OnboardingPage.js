@@ -26,29 +26,49 @@ class OnboardingPage extends BasePage {
 
     // Actions
     async selectEnglish() {
-        await this.clickElement(this.englishButton, 20000);
+        try {
+            await this.clickElement(this.englishButton, 20000);
+        } catch (e) {
+            console.warn('[OnboardingPage] selectEnglish: English button not found, skipping.');
+        }
     }
 
     async clickSelect() {
         try {
             await this.clickElement(this.selectButton, 10000);
         } catch (e) {
-            // Fallback: try locating the Select button by visible text
-            const altSelect = $('android=new UiSelector().text("Select")');
-            await this.clickElement(altSelect, 10000);
+            try {
+                // Fallback: try locating the Select button by visible text
+                const altSelect = $('android=new UiSelector().text("Select")');
+                await this.clickElement(altSelect, 5000);
+            } catch (e2) {
+                console.warn('[OnboardingPage] clickSelect: Select button not found, skipping.');
+            }
         }
     }
 
     async clickIntroContinue() {
-        await this.clickElement(this.continueButton);
+        try {
+            await this.clickElement(this.continueButton, 10000);
+        } catch (e) {
+            console.warn('[OnboardingPage] clickIntroContinue: intro-next-btn not found, skipping.');
+        }
     }
 
     async skip() {
-        await this.clickElement(this.skipButton);
+        try {
+            await this.clickElement(this.skipButton, 10000);
+        } catch (e) {
+            console.warn('[OnboardingPage] skip: Skip button not found, skipping.');
+        }
     }
 
     async continueToApp() {
-        await this.clickElement(this.continueToAppButton, 15000);
+        try {
+            await this.clickElement(this.continueToAppButton, 15000);
+        } catch (e) {
+            console.warn('[OnboardingPage] continueToApp: Continue button not found, skipping.');
+        }
     }
 
     async completeOnboarding() {

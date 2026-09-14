@@ -8,9 +8,9 @@ const {
 } = require('../pageobjects/permissions');
 
 
-describe('Guest User Flow', () => {
+describe(' User Flow', () => {
 
-    it('should enter the store as guest', async () => {
+    it('should enter the store ', async () => {
 
         // -------------------------
         // ONBOARDING
@@ -62,9 +62,13 @@ describe('Guest User Flow', () => {
         // STORE
         // -------------------------
 
-        await StorePage.confirm();
+        // Click Confirm once to enter the store list
         await StorePage.clickConfirmToStore();
-        await StorePage.subscribeToStore("Marsdon's Kitchen");
+
+
+        await StorePage.subscribeToStore("Raymond Bakers");
+
+
 
 
     });

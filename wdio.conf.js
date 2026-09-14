@@ -20,7 +20,7 @@ exports.config = {
         'appium:fullReset': true,
         'appium:newCommandTimeout': 120,
         'appium:appWaitDuration': 30000,
-        'appium:app': 'C:\\Users\\vishnu\\Documents\\apk\\LokbestWithTestIDs.apk'
+        'appium:app': 'C:\\Users\\vishnu\\Documents\\apk\\LokbestWithTestIDs.apk'  
     }],
 
     logLevel: 'info',
