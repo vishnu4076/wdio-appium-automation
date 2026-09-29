@@ -1,0 +1,5 @@
+{
+  "testDate": "2026-09-22",
+  "expectedMonthYear": "September 2026",
+  "bookingWindowDays": 15
+}

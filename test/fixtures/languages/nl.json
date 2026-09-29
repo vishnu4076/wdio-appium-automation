@@ -1,0 +1,153 @@
+{
+  "language": "Nederlands",
+  "languageSelection": {
+    "title": "Kies je taal",
+    "confirm": "Bevestigen"
+  },
+  "onboarding": {
+    "skip": "Overslaan",
+    "continueToApp": "Verder",
+    "step0Header": "Winkelen makkelijk gemaakt",
+    "step0Text": "Ontdek producten en bekijk de beschikbaarheid in de winkel comfortabel vanuit huis.",
+    "step1Header": "Begin met winkelen",
+    "step1Text": "Scan de QR-code bij de winkel om toegang te krijgen en te beginnen met winkelen.",
+    "step2Header": "Producten aan winkelwagen toevoegen",
+    "step2Text": "Scan de QR-code op het schap en voeg zo producten toe aan je winkelwagen.",
+    "step3Header": "Betaalmethode",
+    "step3Text": "Betaal eenvoudig met je favoriete betaalmethode via onze app en neem je boodschappen mee naar huis.",
+    "step4Header": "Statiegeld",
+    "step4Text": "Vergeet niet je statiegeld in te leveren. We schrijven je ingeleverde statiegeld bij en je kunt dit bedrag direct gebruiken voor je aankoop."
+  },
+  "countryPicker": {
+    "welcomeTitle": "Welkom!"
+  },
+  "login": {
+    "continue": "Verder",
+    "signIn": "Inloggen",
+    "logIn": "Inloggen",
+    "logOut": "Uitloggen",
+    "welcomeBack": "Welkom terug!",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "invalidPassword": "Ongeldig wachtwoord",
+    "loginFailed": "Inloggen mislukt",
+    "signInSuccess": "Succesvol ingelogd",
+    "noAccountYet": "Nog geen account?"
+  },
+  "registration": {
+    "title": "Registratie",
+    "register": "Registreren",
+    "firstName": "Voornaam",
+    "lastName": "Achternaam",
+    "emailAddress": "E-mailadres",
+    "password": "Wachtwoord",
+    "phoneNumber": "Mobiel nummer",
+    "welcomeToLokbest": "Welkom bij Lokbest!",
+    "termsAndConditions": "Gebruiksvoorwaarden",
+    "accept": "Accepteren",
+    "byRegisteringYouAgreeToTerms": "Let op: door je registratie af te ronden, ga je akkoord met onze {terms}."
+  },
+  "store": {
+    "confirm": "Bevestigen",
+    "findYourStore": "Vind je winkel",
+    "selectYourStore": "Kies je winkel",
+    "storeDetails": "Winkeldetails",
+    "checkIn": "Inchecken",
+    "search": "Zoeken",
+    "favorites": "Favorieten",
+    "stores": "Winkels",
+    "products": "Producten",
+    "categories": "Categorieen",
+    "noProductsFound": "Geen producten gevonden!",
+    "noFavoriteProducts": "Je hebt nog geen favorieten toegevoegd.",
+    "noStoreFound": "Er is geen winkel gevonden.",
+    "addProduct": "Product toevoegen",
+    "scanProduct": "Product scannen",
+    "cart": "Winkelwagen",
+    "remove": "Verwijderen",
+    "removeFromFavorites": "Uit favorieten verwijderen?",
+    "open": "geopend",
+    "closed": "gesloten"
+  },
+  "settings": {
+    "title": "Instellingen",
+    "language": "Taal",
+    "theme": "THEMA",
+    "darkMode": "Donkere modus",
+    "lightMode": "Lichte modus",
+    "systemMode": "Systeemmodus",
+    "displayMode": "Weergaveopties"
+  },
+  "profile": {
+    "myPurchases": "Mijn aankopen",
+    "myData": "Mijn gegevens",
+    "wallet": "Wallet",
+    "languageAndPreferences": "Taal en instellingen",
+    "information": "Informatie",
+    "logout": "Uitloggen",
+    "areYouSureYouWantToLogout": "Weet je zeker dat je wilt uitloggen?",
+    "deleteAccount": "Account verwijderen",
+    "profile": "Profiel"
+  },
+  "payment": {
+    "payNow": "Nu betalen",
+    "totalAmount": "Totaalbedrag",
+    "paymentMethods": "Betaalmethoden",
+    "completePurchase": "Aankoop afronden",
+    "proceedToCheckout": "Naar de kassa",
+    "checkout": "Uitchecken",
+    "subtotal": "Subtotaal",
+    "paymentSuccessful": "Betaling succesvol",
+    "thankYouPurchase": "Bedankt voor je aankoop"
+  },
+  "verification": {
+    "title": "Verificatie",
+    "verificationCode": "Verificatiecode",
+    "resend": "Opnieuw verzenden",
+    "requestNewCode": "Nieuwe code aanvragen",
+    "verify": "Verifiëren",
+    "otpSentSuccess": "Code succesvol verzonden",
+    "ageVerification": "Leeftijdsverificatie",
+    "verifyNow": "Nu verifiëren"
+  },
+  "navigation": {
+    "home": "Home",
+    "back": "Terug",
+    "close": "Sluiten",
+    "next": "Volgende",
+    "previous": "Vorige",
+    "done": "Klaar",
+    "cancel": "Annuleren",
+    "skip": "Overslaan",
+    "continue": "Verder",
+    "save": "Opslaan",
+    "delete": "Verwijderen",
+    "confirm": "Bevestigen",
+    "retry": "Opnieuw proberen",
+    "apply": "Selecteren"
+  },
+  "wallet": {
+    "title": "Wallet",
+    "totalCredit": "Totaal tegoed",
+    "addMoney": "Geld storten",
+    "shareMoney": "Geld sturen",
+    "redeem": "Inwisselen",
+    "giftVoucher": "Cadeaubon",
+    "redeemGiftVoucher": "Cadeaubon inwisselen",
+    "balance": "Tegoed"
+  },
+  "activities": {
+    "title": "Activiteiten",
+    "storeVisits": "Winkelbezoeken",
+    "news": "Nieuws",
+    "noActivities": "Geen activiteiten",
+    "noNews": "Geen nieuws",
+    "noNotifications": "Geen meldingen"
+  },
+  "permissions": {
+    "title": "Toestemmingen",
+    "location": "Locatie",
+    "camera": "Camera",
+    "notifications": "Meldingen",
+    "continueAsGuest": "Doorgaan als gast"
+  }
+}

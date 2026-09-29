@@ -1,0 +1,154 @@
+{
+  "language": "Deutsch",
+  "languageSelection": {
+    "title": "Wähle deine Sprache",
+    "confirm": "Bestätigen"
+  },
+  "onboarding": {
+    "skip": "Überspringen",
+    "continueToApp": "Weiter",
+    "step0Header": "Einkaufen leicht gemacht",
+    "step0Text": "Entdecke Produkte und prüfe die Verfügbarkeit im Laden ganz bequem von zu Hause aus.",
+    "step1Header": "Starte mit deinem Einkauf",
+    "step1Text": "Scanne den QR Code am Laden, um Zugang zu erhalten und deinen Einkauf zu beginnen.",
+    "step2Header": "Produkte zum Einkaufswagen hinzufügen",
+    "step2Text": "Scanne den QR Code am Regal und füge so die Produkte deinem Einkaufswagen hinzu.",
+    "step3Header": "Zahlungsmethode",
+    "step3Text": "Zahle bequem mit deiner bevorzugten Zahlungsmethode über unsere App und nimm deinen Einkauf mit nach Hause.",
+    "step4Header": "Pfand",
+    "step4Text": "Vergiss nicht dein Pfand abzugeben. Wir schreiben dir dein zurückgegebenes Pfand gut und du kannst diesen Betrag sofort für deinen Einkauf verwenden."
+  },
+  "countryPicker": {
+    "welcomeTitle": "Willkommen!"
+  },
+  "login": {
+    "continue": "Weiter",
+    "signIn": "Anmelden",
+    "logIn": "Anmelden",
+    "logOut": "Abmelden",
+    "welcomeBack": "Willkommen zurück!",
+    "forgotPassword": "Passwort vergessen?",
+    "invalidPassword": "Ungültiges Passwort",
+    "loginFailed": "Anmeldung fehlgeschlagen",
+    "signInSuccess": "Anmeldung erfolgreich",
+    "noAccountYet": "Noch keinen Account?"
+  },
+  "registration": {
+    "title": "Registrierung",
+    "register": "Registrieren",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "emailAddress": "E-Mail Adresse",
+    "password": "Passwort",
+    "phoneNumber": "Handynummer",
+    "welcomeToLokbest": "Willkommen bei Lokbest!",
+    "termsAndConditions": "Nutzungsbedingungen",
+    "accept": "Akzeptieren",
+    "byRegisteringYouAgreeToTerms": "Bitte beachte, dass du mit dem Abschluss deiner Registrierung unseren {terms} zustimmst."
+  },
+  "store": {
+    "confirm": "Bestätigen",
+    "findYourStore": "Finde deinen Laden",
+    "selectYourStore": "Wähle deinen Laden",
+    "storeDetails": "Ladendetails",
+    "checkIn": "Einchecken",
+    "search": "Suchen",
+    "favorites": "Favoriten",
+    "stores": "Läden",
+    "products": "Produkte",
+    "categories": "Kategorien",
+    "noProductsFound": "Keine Produkte gefunden!",
+    "noFavoriteProducts": "Du hast noch keine Favoriten hinzugefügt.",
+    "noStoreFound": "Es wurde kein Laden gefunden.",
+    "addProduct": "Produkt hinzufügen",
+    "scanProduct": "Produkt scannen",
+    "cart": "Warenkorb",
+    "remove": "Entfernen",
+    "removeFromFavorites": "Aus Favoriten entfernen?",
+    "open": "geöffnet",
+    "closed": "geschlossen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "theme": "THEMA",
+    "darkMode": "Dunkler Modus",
+    "lightMode": "Heller Modus",
+    "systemMode": "Systemmodus",
+    "displayMode": "Anzeigeoptionen"
+  },
+  "profile": {
+    "myPurchases": "Meine Einkäufe",
+    "myData": "Meine Daten",
+    "wallet": "Wallet",
+    "languageAndPreferences": "Sprache & Einstellungen",
+    "information": "Informationen",
+    "logout": "Abmelden",
+    "areYouSureYouWantToLogout": "Bist du sicher, dass du abmelden möchtest?",
+    "deleteAccount": "Konto löschen",
+    "profile": "Profil"
+  },
+  "payment": {
+    "payNow": "Jetzt bezahlen",
+    "totalAmount": "Gesamtbetrag",
+    "paymentMethods": "Zahlungsmethoden",
+    "completePurchase": "Einkauf abschließen",
+    "proceedToCheckout": "Zur Kasse",
+    "checkout": "Auschecken",
+    "subtotal": "Zwischensumme",
+    "paymentSuccessful": "Zahlung erfolgreich",
+    "thankYouPurchase": "Vielen Dank für deinen Einkauf"
+  },
+  "verification": {
+    "title": "Verifizierung",
+    "verificationCode": "Verifizierungscode",
+    "resend": "Erneut senden",
+    "requestNewCode": "Neuen Code anfordern",
+    "verify": "Verifizieren",
+    "otpSentSuccess": "OTP erfolgreich gesendet",
+    "ageVerification": "Altersverifizierung",
+    "verifyNow": "Jetzt verifizieren"
+  },
+  "navigation": {
+    "home": "Home",
+    "back": "Zurück",
+    "close": "Schließen",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "done": "Fertig",
+    "cancel": "Abbrechen",
+    "skip": "Überspringen",
+    "continue": "Weiter",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "confirm": "Bestätigen",
+    "retry": "Wiederholen",
+    "apply": "Auswählen"
+  },
+  "wallet": {
+    "title": "Wallet",
+    "totalCredit": "Gesamtguthaben",
+    "addMoney": "Geld einzahlen",
+    "shareMoney": "Geld senden",
+    "redeem": "Einlösen",
+    "giftVoucher": "Geschenkgutschein",
+    "redeemGiftVoucher": "Geschenkgutschein einlösen",
+    "balance": "Guthaben"
+  },
+  "activities": {
+    "title": "Aktivitäten",
+    "storeVisits": "Store Besuche",
+    "news": "Neuigkeiten",
+    "noActivities": "Keine Aktivitäten",
+    "noNews": "Keine Neuigkeiten",
+    "noNotifications": "Keine Benachrichtigungen"
+  },
+  "permissions": {
+    "title": "Berechtigungen",
+    "location": "Standort",
+    "camera": "Kamera",
+    "notifications": "Benachrichtigungen",
+    "continueAsGuest": "Als Gast fortfahren"
+  }
+}
+

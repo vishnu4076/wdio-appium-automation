@@ -8,7 +8,7 @@ describe('Calendar Module', function () {
     this.timeout(300000);
 
     before(async () => {
-        await loginToStore();
+        await loginToStore(); 
 
         // Navigate to the booking/calendar screen
         await StorePage.searchAndOpenStore('18plush');
@@ -16,7 +16,14 @@ describe('Calendar Module', function () {
         await StorePage.clickCheckIn();
         await StorePage.clickVerifyNow();
         await StorePage.clickContactStoreManager();
-        await StorePage.clickStoreToBook("Aditya's Confectionery");
+        const openedStore = await StorePage.clickStoreToBook("Aditya's Confectionery");
+        expect(openedStore).toContain("Aditya's Confectionery");
+
+        // Verify the "Call the Seller" button is visible and clickable on the booking page
+        const callSellerState = await StorePage.getCallTheSellerButtonState();
+        expect(callSellerState.displayed).toBe(true);
+        expect(callSellerState.clickable).toBe(true);
+
         await StorePage.clickSkip();
     });
 

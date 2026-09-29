@@ -1,0 +1,12 @@
+{
+  "defaultUser": {
+    "phoneNumber": "563563563",
+    "password": "Test@123",
+    "country": "Croatia"
+  },
+  "altUser": {
+    "phoneNumber": "3653653650",
+    "password": "Test@1234",
+    "country": "Croatia"
+  }
+}
