@@ -25,6 +25,64 @@ class InformationPage extends BasePage {
         );
     }
 
+    get faqItems() {
+        return $$(
+            '//*[@resource-id="faq-list"]//android.view.ViewGroup[starts-with(@resource-id, "faq-item-")]'
+        );
+    }
+
+    getFaqQuestion(faqItemId) {
+        return $(`//*[@resource-id="${faqItemId}"]/following-sibling::android.widget.TextView[1]`);
+    }
+
+    getFaqToggle(faqItemId) {
+        return $(
+            `//*[@resource-id="${faqItemId}-toggle-btn"]` +
+            ` | //*[@resource-id="${faqItemId}"]/following-sibling::*[contains(@resource-id, "-toggle-btn")][1]` +
+            ` | //*[@resource-id="${faqItemId}"]//android.view.ViewGroup[contains(@resource-id, "-toggle-btn")]`
+        );
+    }
+
+    getFaqAnswer(faqItemId) {
+        return $(`//*[@resource-id="${faqItemId}"]/following-sibling::android.widget.TextView[2]`);
+    }
+
+    async getFaqQuestionText(faqItemId) {
+        // Prioritize sibling (DOM confirmed: TextView is sibling of faq-item-*)
+        const sibling = this.getFaqQuestion(faqItemId);
+        let text = (await sibling.getText().catch(() => '')).trim();
+        if (text) {
+            return text;
+        }
+
+        // Fallback to child/descendant
+        const child = $(`//*[@resource-id="${faqItemId}"]//android.widget.TextView[1]`);
+        text = (await child.getText().catch(() => '')).trim();
+        if (text) {
+            return text;
+        }
+
+        return '';
+    }
+
+    async getFaqAnswerText(faqItemId) {
+        // Prioritize sibling (when expanded, answer is following-sibling TextView 2)
+        const sibling = this.getFaqAnswer(faqItemId);
+        let text = (await sibling.getText().catch(() => '')).trim();
+        if (text) {
+            return text;
+        }
+
+        // Fallback to child/descendant
+        const child = $(`//*[@resource-id="${faqItemId}"]//android.widget.TextView[2]`);
+        text = (await child.getText().catch(() => '')).trim();
+        if (text) {
+            return text;
+        }
+
+        return '';
+    }
+
     async clickInformationTile() {
         await this.informationTile.waitForDisplayed({
             timeout: TIMEOUTS.LONG
@@ -39,7 +97,7 @@ class InformationPage extends BasePage {
         } catch (_) {
             const container = await $('//*[@resource-id="profile-tile-InformationScreen"]').catch(() => null);
             if (container && await container.isDisplayed().catch(() => false)) {
-                await container.click().catch(() => {});
+                await container.click().catch(() => { });
             }
             await this.faqTile.waitForDisplayed({
                 timeout: TIMEOUTS.LONG
@@ -59,7 +117,7 @@ class InformationPage extends BasePage {
         );
         await faqIndicator.waitForDisplayed({
             timeout: TIMEOUTS.LONG
-        }).catch(() => {});
+        }).catch(() => { });
         await browser.pause(1000);
     }
 
@@ -85,47 +143,80 @@ class InformationPage extends BasePage {
         }
     }
 
-    async getAllFaqTexts(expectedList = []) {
-        const collectedTexts = [];
-        const seenTexts = new Set();
+    /**
+     * Collects all FAQ items (questions and expanded answers) from the UI by dynamically
+     * scrolling through the FAQ list until all items are discovered.
+     * @returns {Promise<Array<{ id: string, question: string, answer: string }>>}
+     */
+    async getAllFaqItems() {
+        const extractedFaqs = [];
+        const processedItemIds = new Set();
         let consecutiveStall = 0;
+        const MAX_SCROLLS = 15;
 
-        for (let scroll = 0; scroll < 10; scroll++) {
-            const elements = await $$('//android.widget.TextView');
+        for (let scroll = 0; scroll < MAX_SCROLLS; scroll++) {
+            const items = await this.faqItems;
+            let newProcessed = 0;
 
-            let newFoundInScroll = 0;
-            for (const el of elements) {
-                try {
-                    const text = await el.getText().catch(() => '');
-                    const trimmed = text ? text.trim() : '';
-                    if (!trimmed || trimmed === 'null' || trimmed === 'undefined') {
-                        continue;
-                    }
+            for (const item of items) {
+                const faqItemId = await item.getAttribute('resource-id').catch(() => null);
+                if (!faqItemId || !faqItemId.startsWith('faq-item-') || faqItemId.includes('-toggle-btn')) {
+                    continue;
+                }
 
-                    // Ignore screen title, navigation or non-question labels
-                    if (/^faqs?$/i.test(trimmed) || trimmed === 'Information' || trimmed === '<' || trimmed.length < 5) {
-                        continue;
-                    }
+                if (processedItemIds.has(faqItemId)) {
+                    continue;
+                }
 
-                    if (expectedList.length > 0 && !expectedList.includes(trimmed)) {
-                        continue;
-                    }
+                // 1. Extract Question text
+                let questionText = await this.getFaqQuestionText(faqItemId);
+                if (!questionText) {
+                    await browser.pause(400);
+                    questionText = await this.getFaqQuestionText(faqItemId);
+                }
 
-                    if (!seenTexts.has(trimmed)) {
-                        seenTexts.add(trimmed);
-                        collectedTexts.push(trimmed);
-                        newFoundInScroll++;
-                    }
-                } catch (_) {}
+                // 2. Expand Toggle
+                const toggleEl = this.getFaqToggle(faqItemId);
+                if (await toggleEl.isDisplayed().catch(() => false)) {
+                    await toggleEl.click();
+                    await browser.pause(500);
+                }
+
+                // Retry question if boundary rendering delayed it
+                if (!questionText) {
+                    questionText = await this.getFaqQuestionText(faqItemId);
+                }
+
+                // 3. Extract Answer text
+                let answerText = await this.getFaqAnswerText(faqItemId);
+                if (!answerText) {
+                    await browser.pause(400);
+                    answerText = await this.getFaqAnswerText(faqItemId);
+                }
+
+                // 4. Collapse Toggle to maintain clean scroll geometry
+                if (await toggleEl.isDisplayed().catch(() => false)) {
+                    await toggleEl.click().catch(() => { });
+                    await browser.pause(300);
+                }
+
+                if (!questionText) {
+                    throw new Error(`Failed to extract question text for FAQ item: "${faqItemId}"`);
+                }
+
+                extractedFaqs.push({
+                    id: faqItemId,
+                    question: questionText,
+                    answer: answerText
+                });
+
+                processedItemIds.add(faqItemId);
+                newProcessed++;
             }
 
-            if (collectedTexts.length >= 12) {
-                break;
-            }
-
-            if (newFoundInScroll === 0) {
+            if (newProcessed === 0) {
                 consecutiveStall++;
-                if (consecutiveStall >= 3) {
+                if (consecutiveStall >= 2) {
                     break;
                 }
             } else {
@@ -135,7 +226,14 @@ class InformationPage extends BasePage {
             await this.scrollDown();
         }
 
-        return collectedTexts;
+        return extractedFaqs;
+    }
+
+    /**
+     * Backward-compatible alias for getAllFaqItems
+     */
+    async extractAllFaqQnA() {
+        return this.getAllFaqItems();
     }
 }
 

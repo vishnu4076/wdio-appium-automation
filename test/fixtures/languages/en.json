@@ -165,6 +165,56 @@
       "What are the opening hours?",
       "What products are available in-store?",
       "How can I open my own store with the Lokbest app?"
+    ],
+    "items": [
+      {
+        "question": "How do I register in the Lokbest app?",
+        "answer": "Start on the login page and tap Register\". Fill in your details"
+      },
+      {
+        "question": "Why haven't I received a verification code via SMS?",
+        "answer": "The SMS should arrive within 1 to 2 minutes. Please make sure you have sufficient mobile reception so the message can be delivered."
+      },
+      {
+        "question": "How do I enter the store?",
+        "answer": "Select your store in the Lokbest app and tap Check-in\" at the top right. Hold the generated QR code 10 to 20 cm in front of the door reader to unlock the door.\""
+      },
+      {
+        "question": "How do I add a product to my shopping cart?",
+        "answer": "Tap Add product\" in the app and scan the QR or EAN code on the item. To add multiple items of the same type"
+      },
+      {
+        "question": "How do I pay?",
+        "answer": "Make sure all items are scanned into your digital cart, then tap Go to checkout\" in the app. Select your preferred payment method and follow the prompts.\""
+      },
+      {
+        "question": "How do I return deposit containers?",
+        "answer": "Return deposit containers to the crates in the store where you bought them. Before shopping, tap Return deposit\" in the app and select the returned containers. Tap \"Apply credit\" in your cart to use the refund on your next purchase.\""
+      },
+      {
+        "question": "How do I redeem a discount code?",
+        "answer": "After checking in, the app automatically opens your cart. Enter your voucher in the Discount code\" field and tap \"Redeem code\" to apply your savings.\""
+      },
+      {
+        "question": "What should I keep in mind when leaving the store?",
+        "answer": "You can easily leave the store using the Lokbest app after completing your purchase. If you didn't buy anything, you can simply leave like in any regular store."
+      },
+      {
+        "question": "I am getting an error message. What should I do?",
+        "answer": "Log out of the Lokbest app and restart it. Once you log back in, the app should work smoothly. If the issue persists, please contact customer support."
+      },
+      {
+        "question": "What are the opening hours?",
+        "answer": "Our stores are generally open 24/7, Monday through Sunday. Store operators can adjust these times individually, so check the Lokbest app for the exact hours of a specific store."
+      },
+      {
+        "question": "What products are available in-store?",
+        "answer": "Our stores offer a wide selection of high-quality regional food and products. Select your store in the Lokbest app to browse categories or the full range, which is individually curated by each store operator."
+      },
+      {
+        "question": "How can I open my own store with the Lokbest app?",
+        "answer": "Contact us directly via email at info@lokbest-store.com or by phone at +49 151 22580517. For more information, visit our website at lokbest-store.com."
+      }
     ]
   }
 }

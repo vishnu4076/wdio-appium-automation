@@ -654,45 +654,41 @@ describe('English Localization E2E Verification', function () {
 
         await InformationPage.clickFaqTile();
 
-        const expectedFaqTexts =
-            enData.faqs.questions;
-
-        const actualFaqTexts =
-            await InformationPage.getAllFaqTexts(
-                expectedFaqTexts
-            );
+        const expectedFaqItems = enData.faqs.items || [];
+        const actualFaqItems = await InformationPage.getAllFaqItems();
 
         validator.logResult(
-            'FAQ question count',
-            `${actualFaqTexts.length}/${expectedFaqTexts.length}`,
-            actualFaqTexts.length === expectedFaqTexts.length
+            'FAQ item count',
+            `${actualFaqItems.length}/${expectedFaqItems.length}`,
+            actualFaqItems.length === expectedFaqItems.length
                 ? 'PASS'
                 : 'FAIL'
         );
 
-        expect(actualFaqTexts.length).toBe(
-            expectedFaqTexts.length
-        );
+        expect(actualFaqItems.length).toBe(expectedFaqItems.length);
 
-        expectedFaqTexts.forEach(
-            (expectedText, index) => {
+        for (let i = 0; i < expectedFaqItems.length; i++) {
+            const expected = expectedFaqItems[i];
+            const actual = actualFaqItems[i];
 
-                const actualText =
-                    actualFaqTexts[index];
+            validator.logResult(
+                `FAQ ${i + 1} Question`,
+                actual ? actual.question : '',
+                actual && actual.question === expected.question
+                    ? 'PASS'
+                    : 'FAIL'
+            );
+            expect(actual.question).toBe(expected.question);
 
-                validator.logResult(
-                    `FAQ ${index + 1}`,
-                    actualText,
-                    actualText === expectedText
-                        ? 'PASS'
-                        : 'FAIL'
-                );
-
-                expect(actualText).toBe(
-                    expectedText
-                );
-            }
-        );
+            validator.logResult(
+                `FAQ ${i + 1} Answer`,
+                actual ? actual.answer : '',
+                actual && actual.answer === expected.answer
+                    ? 'PASS'
+                    : 'FAIL'
+            );
+            expect(actual.answer).toBe(expected.answer);
+        }
 
     });
 
