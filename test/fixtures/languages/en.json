@@ -149,5 +149,22 @@
     "camera": "Camera",
     "notifications": "Notifications",
     "continueAsGuest": "Continue as a guest"
+  },
+  "faqs": {
+    "title": "FAQs",
+    "questions": [
+      "How do I register in the Lokbest app?",
+      "Why haven't I received a verification code via SMS?",
+      "How do I enter the store?",
+      "How do I add a product to my shopping cart?",
+      "How do I pay?",
+      "How do I return deposit containers?",
+      "How do I redeem a discount code?",
+      "What should I keep in mind when leaving the store?",
+      "I am getting an error message. What should I do?",
+      "What are the opening hours?",
+      "What products are available in-store?",
+      "How can I open my own store with the Lokbest app?"
+    ]
   }
 }

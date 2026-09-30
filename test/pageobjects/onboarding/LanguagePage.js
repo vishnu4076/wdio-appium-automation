@@ -3,15 +3,15 @@ const { TIMEOUTS } = require('../../constants/timeouts');
 
 // Display names shown in the language selection sheet
 const languageDisplayNames = {
-    Deutsch:  'Deutsch',
-    English:  'English',
+    Deutsch: 'Deutsch',
+    English: 'English',
     Italiano: 'Italiano',
 };
 
 // Resource-id based index map (used as primary strategy)
 const languageIds = {
-    Deutsch:  'language-sheet-language-option-0',
-    English:  'language-sheet-language-option-1',
+    Deutsch: 'language-sheet-language-option-0',
+    English: 'language-sheet-language-option-1',
     Italiano: 'language-sheet-language-option-2',
 };
 

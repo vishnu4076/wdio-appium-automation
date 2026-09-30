@@ -8,7 +8,9 @@ class ProfilePage extends BasePage {
     // ============================================================
 
     get profileTitle() {
-        return $('id:profile-title');
+        return $(
+            '//*[@resource-id="profile-title"]//android.widget.TextView | //*[@resource-id="profile-title"] | //*[@text="Profile" or @content-desc="Profile"]'
+        );
     }
 
     // ============================================================
@@ -16,48 +18,84 @@ class ProfilePage extends BasePage {
     // ============================================================
 
     get myPurchasesButton() {
-        return $('id:profile-tile-Orders');
+        return $(
+            '//*[contains(@resource-id, "Orders") or contains(@resource-id, "Purchase")]//android.widget.TextView' +
+            ' | //*[contains(@resource-id, "Orders") or contains(@resource-id, "Purchase")]' +
+            ' | //*[@text="My Purchases" or @content-desc="My Purchases"]'
+        );
     }
 
     get myDataButton() {
-        return $('id:profile-tile-MyDataScreen');
+        return $(
+            '//*[contains(@resource-id, "MyData")]//android.widget.TextView' +
+            ' | //*[contains(@resource-id, "MyData")]' +
+            ' | //*[@text="My Data" or @content-desc="My Data"]'
+        );
     }
 
     get walletButton() {
-        return $('id:profile-tile-WalletScreen');
+        return $(
+            '//*[contains(@resource-id, "Wallet")]//android.widget.TextView' +
+            ' | //*[contains(@resource-id, "Wallet")]' +
+            ' | //*[@text="Wallet" or @content-desc="Wallet"]'
+        );
     }
 
     get returnDepositButton() {
-        return $('id:profile-tile-ReturnDeposit');
+        return $(
+            '//*[contains(@resource-id, "Deposit") or contains(@resource-id, "ReturnDeposit")]//android.widget.TextView' +
+            ' | //*[contains(@resource-id, "Deposit") or contains(@resource-id, "ReturnDeposit")]' +
+            ' | //*[@text="Deposit" or @content-desc="Deposit"]'
+        );
     }
 
     get languageAndPreferencesButton() {
-        return $('id:profile-tile-LanguagePreferences');
+        return $(
+            '//*[contains(@resource-id, "Language") or contains(@resource-id, "Preferences")]//android.widget.TextView' +
+            ' | //*[contains(@resource-id, "Language") or contains(@resource-id, "Preferences")]' +
+            ' | //*[@text="Language & Preferences" or @content-desc="Language & Preferences"]'
+        );
     }
 
     get informationButton() {
-        return $('id:profile-tile-InformationScreen');
+        return $(
+            '//*[contains(@resource-id, "Information")]//android.widget.TextView' +
+            ' | //*[contains(@resource-id, "Information")]' +
+            ' | //*[@text="Information" or @content-desc="Information"]'
+        );
     }
+
+    get informationTile() {
+        return this.informationButton;
+    }
+
     get backButton() {
         return $('~header-back-btn');
     }
-
-
 
     // ============================================================
     // ACTIONS
     // ============================================================
 
     get logoutButton() {
-        return $('id:profile-login-logout-btn');
+        return $(
+            '//*[@resource-id="profile-login-logout-btn"]//android.widget.TextView' +
+            ' | //*[@resource-id="profile-login-logout-btn"]' +
+            ' | //*[@text="Logout" or @content-desc="Logout"]'
+        );
     }
 
     get deleteAccountButton() {
-        return $('id:profile-delete-account-btn');
+        return $(
+            '//*[contains(@resource-id, "delete-account")]//android.widget.TextView' +
+            ' | //*[contains(@resource-id, "delete-account")]' +
+            ' | //*[@text="Delete Account" or @content-desc="Delete Account"]'
+        );
     }
     async clickBack() {
         await this.backButton.click();
     }
+
 
     // ============================================================
     // HELPER – reads content-desc first, then getText(), then UiSelector by id

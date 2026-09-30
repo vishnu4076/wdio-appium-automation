@@ -64,12 +64,22 @@ class StorePage extends BasePage {
     }
 
     get productsTab() {
-        return $('id:home-tab-products-btn');
+        return $(
+            '//*[@resource-id="home-tab-products-btn"]//android.widget.TextView | //*[@resource-id="home-tab-products-btn"]'
+        );
     }
 
     get categoriesTab() {
-        return $('id:home-tab-categories-btn');
+        return $(
+            '//*[@resource-id="home-tab-categories-btn"]//android.widget.TextView | //*[@resource-id="home-tab-categories-btn"]'
+        );
     }
+
+    async clickActivitiesTab() {
+        await this.activitiesTab.waitForDisplayed({ timeout: 15000 });
+        await this.activitiesTab.click();
+    }
+
 
     // ============================================================
     // CONFIRM TO STORE
@@ -331,12 +341,16 @@ class StorePage extends BasePage {
     // ============================================================
 
     get skipTourButton() {
-        return $('~tour-skip-btn');
+        return $(
+            '//*[@resource-id="tour-skip-btn" or @content-desc="tour-skip-btn"]//android.widget.TextView' +
+            ' | //*[@resource-id="tour-skip-btn" or @content-desc="tour-skip-btn"]' +
+            ' | //*[@text="Skip" or @content-desc="Skip"]'
+        );
     }
 
     async clickTourSkip(localizedText = null) {
         const btn = localizedText
-            ? $(`android=new UiSelector().text("${localizedText}")`)
+            ? $(`//*[@resource-id="tour-skip-btn" or @content-desc="${localizedText}" or @text="${localizedText}"]`)
             : this.skipTourButton;
 
         await btn.waitForDisplayed({
@@ -372,7 +386,9 @@ class StorePage extends BasePage {
     // ============================================================
 
     get checkInButton() {
-        return $('id:home-checkin-btn');
+        return $(
+            '//*[@resource-id="home-checkin-btn"]//android.widget.TextView | //*[@resource-id="home-checkin-btn"]'
+        );
     }
 
     async clickCheckIn() {
