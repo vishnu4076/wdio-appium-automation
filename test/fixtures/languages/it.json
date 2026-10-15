@@ -149,6 +149,72 @@
     "camera": "Fotocamera",
     "notifications": "Notifiche",
     "continueAsGuest": "Continua come ospite"
+  },
+  "faqs": {
+    "title": "Domande frequenti",
+    "questions": [
+      "Come mi registro nell'app Lokbest?",
+      "Perché non ho ricevuto il codice di verifica via SMS?",
+      "Come entro nel negozio?",
+      "Come posso aggiungo un prodotto al carrello?",
+      "Come posso pagare?",
+      "Come posso restituire il vuoto a rendere?",
+      "Come posso riscattare un codice sconto?",
+      "Cosa devo sapere quando esco dal negozio?",
+      "Ricevo un messaggio di errore. Cosa devo fare?",
+      "Quali sono gli orari di apertura?",
+      "Cosa posso acquistare in negozio?",
+      "Come posso aprire il mio negozio con l'app Lokbest?"
+    ],
+    "items": [
+      {
+        "question": "Come mi registro nell'app Lokbest?",
+        "answer": "Inizia dalla pagina di accesso e tocca Registrati\". Inserisci i tuoi dati"
+      },
+      {
+        "question": "Perché non ricevo il codice di verifica via SMS?",
+        "answer": "L'SMS dovrebbe arrivare entro 1 o 2 minuti. Assicurati di avere una copertura di rete sufficiente in modo che il messaggio possa essere recapitato."
+      },
+      {
+        "question": "Come entro nel negozio?",
+        "answer": "Seleziona il tuo negozio nell'app Lokbest e tocca Check-in\" in alto a destra. Scansiona il QR code mostrato tenendolo a 10-20 cm dal lettore accanto alla porta per aprirla.\""
+      },
+      {
+        "question": "Come aggiungo un prodotto al carrello?",
+        "answer": "Tocca Aggiungi prodotto\" nell'app e scansiona il codice QR o EAN del prodotto. Per aggiungere più unità dello stesso articolo"
+      },
+      {
+        "question": "Come posso pagare?",
+        "answer": "Assicurati che tutti i prodotti siano nel carrello digitale, quindi tocca Vai alla cassa\" nell'app. Seleziona il tuo metodo di pagamento preferito e segui le istruzioni.\""
+      },
+      {
+        "question": "Come posso restituire il vuoto a rendere?",
+        "answer": "Riporta i contenitori nel negozio dove li hai acquistati e mettili nelle cassette. Prima di fare acquisti, tocca Restituisci vuoti\" nell'app e seleziona i contenitori resi. Nel carrello"
+      },
+      {
+        "question": "Come posso riscattare un codice sconto?",
+        "answer": "Dopo il check-in, l'app passa automaticamente al carrello. Inserisci il codice nel campo Codice sconto\" e tocca \"Riscatta codice\" per applicare subito lo sconto.\""
+      },
+      {
+        "question": "Cosa devo sapere quando esco dal negozio?",
+        "answer": "Puoi uscire dal negozio tramite l'app Lokbest dopo il tuo acquisto. Se non hai acquistato nulla, puoi uscire liberamente come in un normale negozio."
+      },
+      {
+        "question": "Ricevo un messaggio di errore. Cosa devo fare?",
+        "answer": "Disconnettiti dall'app Lokbest e riavviala. Dopo aver effettuato nuovamente l'accesso, l'app dovrebbe funzionare correttamente. Se il problema persiste, contatta il servizio clienti."
+      },
+      {
+        "question": "Quali sono gli orari di apertura?",
+        "answer": "I nostri negozi sono generalmente aperti 24/7, dal lunedì alla domenica. I gestori possono personalizzare gli orari: controlla l'app Lokbest per gli orari esatti del singolo negozio."
+      },
+      {
+        "question": "Cosa posso acquistare in negozio?",
+        "answer": "Nei nostri negozi trovi un'ampia selezione di prodotti alimentari e locali di alta qualità. Seleziona il tuo negozio nell'app Lokbest per esplorare l'assortimento, curato dal singolo gestore."
+      },
+      {
+        "question": "Come posso aprire il mio negozio con l'app Lokbest?",
+        "answer": "Contattaci direttamente via e-mail all'indirizzo info@lokbest-store.com o al numero 0151/22580517. Trovi maggiori informazioni sul nostro sito web: lokbest-store.com."
+      }
+    ]
   }
 }
-

@@ -12,6 +12,8 @@
  *  6. Store Confirmation (Confirm to Store button)
  *  7. Store Home (Products, Categories, Check In, Stores, Activities)
  *  8. Profile (Profile tab, Profile title, and all menu tiles)
+ *  9. Information (Information tile navigation)
+ * 10. FAQ (All questions and expanded answers in German)
  *
  * Source of truth: test/fixtures/languages/de.json
  */
@@ -22,6 +24,7 @@ const CountryPickerPage = require('../../pageobjects/authentication/CountryPicke
 const LoginPage = require('../../pageobjects/authentication/LoginPage');
 const StorePage = require('../../pageobjects/store/StorePage');
 const ProfilePage = require('../../pageobjects/profie/ProfilePage');
+const InformationPage = require('../../pageobjects/profie/InformationPage');
 const { handlePermissions } = require('../../utils/permissions/permissionHandler');
 const LocalizationValidator = require('../../utils/localization/LocalizationValidator');
 const deData = require('../../fixtures/languages/de.json');
@@ -304,5 +307,51 @@ describe('German (Deutsch) Localization E2E Verification', function () {
 
         // Verify no untranslated English text is displayed on Profile screen
         validator.detectUntranslatedEnglish(visibleProfileTexts);
+
+
+        // ============================================================
+        // 9. INFORMATION
+        // ============================================================
+        validator.printSection('Information');
+
+        await InformationPage.clickInformationTile();
+
+
+        // ============================================================
+        // 10. FAQ
+        // ============================================================
+        validator.printSection('FAQ');
+
+        await InformationPage.clickFaqTile();
+
+        const expectedFaqItems = (deData.faqs && deData.faqs.items) ? deData.faqs.items : [];
+        const actualFaqItems = await InformationPage.getAllFaqItems();
+
+        validator.logResult(
+            'FAQ item count',
+            `${actualFaqItems.length}/${expectedFaqItems.length}`,
+            actualFaqItems.length === expectedFaqItems.length ? 'PASS' : 'FAIL'
+        );
+        expect(actualFaqItems.length).toBe(expectedFaqItems.length);
+
+        for (let i = 0; i < expectedFaqItems.length; i++) {
+            const expected = expectedFaqItems[i];
+            const actual = actualFaqItems[i];
+
+            validator.logResult(
+                `FAQ ${i + 1} Question`,
+                actual ? actual.question : '',
+                actual && actual.question === expected.question ? 'PASS' : 'FAIL'
+            );
+            expect(actual.question).toBe(expected.question);
+
+            validator.logResult(
+                `FAQ ${i + 1} Answer`,
+                actual ? actual.answer : '',
+                actual && actual.answer === expected.answer ? 'PASS' : 'FAIL'
+            );
+            expect(actual.answer).toBe(expected.answer);
+        }
     });
 });
+

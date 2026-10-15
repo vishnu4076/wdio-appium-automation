@@ -149,6 +149,72 @@
     "camera": "Kamera",
     "notifications": "Benachrichtigungen",
     "continueAsGuest": "Als Gast fortfahren"
+  },
+  "faqs": {
+    "title": "Häufig gestellte Fragen",
+    "questions": [
+      "Wie registriere ich mich in der Lokbest-App?",
+      "Warum erhalte ich keinen Verifizierungscode per SMS?",
+      "Wie betrete ich den Store?",
+      "Wie füge ich ein Produkt meinem Warenkorb hinzu?",
+      "Wie kann ich bezahlen?",
+      "Wie kann ich mein Pfand zurückgeben?",
+      "Wie löse ich meinen Rabattcode ein?",
+      "Was muss ich beim Verlassen des Stores beachten?",
+      "Ich erhalte eine Fehlermeldung. Was soll ich tun?",
+      "Wie sind die Öffnungszeiten?",
+      "Was kann ich vor Ort kaufen?",
+      "Wie kann ich einen eigenen Store mit der Lokbest-App eröffnen?"
+    ],
+    "items": [
+      {
+        "question": "Wie registriere ich mich in der Lokbest-App?",
+        "answer": "Starte auf der Anmeldeseite und klicke auf „Registrieren“. Gib deine Daten ein und trage anschließend den Bestätigungscode ein, den wir dir per SMS senden. Gib zum Schluss deine Rechnungsadresse ein und wähle deinen bevorzugten Store aus."
+      },
+      {
+        "question": "Warum erhalte ich keinen Verifizierungscode per SMS?",
+        "answer": "Die SMS sollte spätestens nach 1 bis 2 Minuten ankommen. Bitte stelle sicher, dass du ausreichend Mobilfunkempfang hast, damit die SMS zugestellt werden kann."
+      },
+      {
+        "question": "Wie betrete ich den Store?",
+        "answer": "Wähle deinen Store in der Lokbest-App aus und klicke oben rechts auf „Einchecken“. Halte den angezeigten QR-Code im Abstand von 10 bis 20 cm vor den Leser neben der Tür, um sie zu öffnen."
+      },
+      {
+        "question": "Wie füge ich ein Produkt meinem Warenkorb hinzu?",
+        "answer": "Tippe in der App auf „Produkt hinzufügen“ und scanne den QR- oder EAN-Code des Produkts. Für mehrere Artikel des gleichen Produkts scanne den Code einmal und passe die Anzahl mit „+“ und „-“ an."
+      },
+      {
+        "question": "Wie kann ich bezahlen?",
+        "answer": "Stelle sicher, dass alle Produkte im digitalen Warenkorb liegen, und tippe in der App auf „Zur Kasse“. Wähle deine bevorzugte Zahlungsmethode und folge den Anweisungen."
+      },
+      {
+        "question": "Wie kann ich mein Pfand zurückgeben?",
+        "answer": "Bringe die Pfandgläser zurück in den Store, in dem du sie gekauft hast, und stelle sie in die Kisten. Tippe vor dem Einkauf in der App auf „Pfand abgeben“ und wähle die abgegebenen Gläser aus. Wähle im Warenkorb „Guthaben anwenden“, um dein Pfand verrechnen zu lassen."
+      },
+      {
+        "question": "Wie löse ich meinen Rabattcode ein?",
+        "answer": "Nach dem Check-in wechselt die App automatisch in den Warenkorb. Gib deinen Code in das Feld „Rabattcode“ ein und tippe auf „Code einlösen“, um den Rabatt direkt anzuwenden."
+      },
+      {
+        "question": "Was muss ich beim Verlassen des Stores beachten?",
+        "answer": "Du kannst den Store nach deinem Einkauf ganz einfach über die Lokbest-App verlassen. Wenn du nichts gekauft hast, kannst du den Store einfach wie ein normales Geschäft verlassen."
+      },
+      {
+        "question": "Ich erhalte eine Fehlermeldung. Was soll ich tun?",
+        "answer": "Melde dich in der Lokbest-App ab und starte sie neu. Nach dem erneuten Anmelden sollte wieder alles funktionieren. Bleibt das Problem bestehen? Kontaktiere einfach unseren Kundenservice."
+      },
+      {
+        "question": "Wie sind die Öffnungszeiten?",
+        "answer": "Unsere Stores sind in der Regel rund um die Uhr (24/7) von Montag bis Sonntag geöffnet. Die Betreiber können diese Zeiten individuell anpassen. Die genauen Öffnungszeiten findest du direkt in der Lokbest-App."
+      },
+      {
+        "question": "Was kann ich vor Ort kaufen?",
+        "answer": "In unseren Stores findest du ein breites Angebot an hochwertigen, regionalen Lebensmitteln und Produkten. Wähle einfach deinen Store in der Lokbest-App aus, um das Sortiment zu durchstöbern. Das Angebot wird vom jeweiligen Betreiber zusammengestellt."
+      },
+      {
+        "question": "Wie kann ich einen eigenen Store mit der Lokbest-App eröffnen?",
+        "answer": "Kontaktiere uns direkt per E-Mail unter info@lokbest-store.com oder telefonisch unter 0151/22580517. Weitere Informationen findest du auf unserer Website: lokbest-store.com."
+      }
+    ]
   }
 }
-

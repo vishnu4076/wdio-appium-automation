@@ -66,19 +66,41 @@ class InformationPage extends BasePage {
     }
 
     async getFaqAnswerText(faqItemId) {
-        // Prioritize sibling (when expanded, answer is following-sibling TextView 2)
-        const sibling = this.getFaqAnswer(faqItemId);
-        let text = (await sibling.getText().catch(() => '')).trim();
-        if (text) {
-            return text;
-        }
+        // Strategy 1: Direct following-sibling TextView[2] (standard structure)
+        const sibling2 = this.getFaqAnswer(faqItemId);
+        let text = (await sibling2.getText().catch(() => '')).trim();
+        if (text) return text;
 
-        // Fallback to child/descendant
-        const child = $(`//*[@resource-id="${faqItemId}"]//android.widget.TextView[2]`);
-        text = (await child.getText().catch(() => '')).trim();
-        if (text) {
-            return text;
-        }
+        // Strategy 2a: Answer wrapped in a non-toggle sibling ViewGroup
+        try {
+            const siblingVgs = await $$(
+                `//*[@resource-id="${faqItemId}"]/following-sibling::android.view.ViewGroup`
+            );
+            for (const vg of siblingVgs) {
+                const rid = await vg.getAttribute('resource-id').catch(() => '');
+                if (rid && rid.includes('toggle-btn')) continue;
+                const innerTv = await vg.$('android.widget.TextView').catch(() => null);
+                if (innerTv) {
+                    text = (await innerTv.getText().catch(() => '')).trim();
+                    if (text && text.length > 10) return text;
+                }
+            }
+        } catch (_) { }
+
+        // Strategy 2b: Answer inside toggle-btn container (some accordion implementations)
+        const insideToggle = $(`//*[@resource-id="${faqItemId}-toggle-btn"]//android.widget.TextView`);
+        text = (await insideToggle.getText().catch(() => '')).trim();
+        if (text && text.length > 10) return text;
+
+        // Strategy 3: following-sibling TextView[3] in case toggle adds an extra sibling
+        const sibling3 = $(`//*[@resource-id="${faqItemId}"]/following-sibling::android.widget.TextView[3]`);
+        text = (await sibling3.getText().catch(() => '')).trim();
+        if (text) return text;
+
+        // Strategy 4: Descendant of faq-item itself (child layout structure)
+        const descendant = $(`//*[@resource-id="${faqItemId}"]//android.widget.TextView[2]`);
+        text = (await descendant.getText().catch(() => '')).trim();
+        if (text) return text;
 
         return '';
     }
@@ -179,7 +201,7 @@ class InformationPage extends BasePage {
                 const toggleEl = this.getFaqToggle(faqItemId);
                 if (await toggleEl.isDisplayed().catch(() => false)) {
                     await toggleEl.click();
-                    await browser.pause(500);
+                    await browser.pause(800);
                 }
 
                 // Retry question if boundary rendering delayed it
@@ -190,7 +212,15 @@ class InformationPage extends BasePage {
                 // 3. Extract Answer text
                 let answerText = await this.getFaqAnswerText(faqItemId);
                 if (!answerText) {
-                    await browser.pause(400);
+                    // Retry 1: wait longer for expand animation 
+                    await browser.pause(600);
+                    answerText = await this.getFaqAnswerText(faqItemId);
+                }
+                if (!answerText) {
+                    // Retry 2: scroll down to bring answer into viewport
+                    // (React Native virtualization may not render off-screen answer elements)
+                    await this.scrollDown();
+                    await browser.pause(600);
                     answerText = await this.getFaqAnswerText(faqItemId);
                 }
 
