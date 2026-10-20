@@ -133,7 +133,16 @@
     "redeem": "Riscattare",
     "giftVoucher": "Buono regalo",
     "redeemGiftVoucher": "Riscattare il buono regalo",
-    "balance": "Saldo"
+    "balance": "Saldo",
+    "walletHowItWorks": {
+      "title": "Come funziona il Wallet nella schermata principale del Wallet",
+      "messages": [
+        "Il Wallet riflette il tuo saldo e i negozi in cui è valido.",
+        "Aggiungi saldo al Wallet restituendo articoli con cauzione (Pfand) o pagando con metodi digitali, inclusi i codici regalo.",
+        "Il saldo è sempre legato a uno (o più) negozi specifici, quindi puoi riceverlo e spenderlo solo in quei negozi.",
+        "Il saldo può essere utilizzato per fare acquisti in un negozio oppure per inviarlo ad amici e familiari."
+      ]
+    }
   },
   "activities": {
     "title": "Attività",

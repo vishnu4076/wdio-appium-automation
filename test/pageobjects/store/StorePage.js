@@ -348,18 +348,10 @@ class StorePage extends BasePage {
         );
     }
 
-    getSkipButton(localizedText = null) {
-        if (localizedText) {
-            return $(
-                `//*[@resource-id="tour-skip-btn" or @content-desc="${localizedText}" or @text="${localizedText}"` +
-                ` or @content-desc="Skip" or @text="Skip"]`
-            );
-        }
-        return this.skipTourButton;
-    }
-
     async clickTourSkip(localizedText = null) {
-        const btn = this.getSkipButton(localizedText);
+        const btn = localizedText
+            ? $(`//*[@resource-id="tour-skip-btn" or @content-desc="${localizedText}" or @text="${localizedText}"]`)
+            : this.skipTourButton;
 
         await btn.waitForDisplayed({
             timeout: 10000
@@ -370,17 +362,16 @@ class StorePage extends BasePage {
     }
 
     get skipButton() {
-        return this.getSkipButton();
+        return $('~Skip');
     }
 
-    async clickSkip(localizedText = null) {
+    async clickSkip() {
         try {
-            const btn = this.getSkipButton(localizedText);
-            await btn.waitForDisplayed({
+            await this.skipButton.waitForDisplayed({
                 timeout: TIMEOUTS.MEDIUM
             });
 
-            await btn.click();
+            await this.skipButton.click();
             await browser.pause(1000);
 
         } catch (e) {
@@ -412,43 +403,20 @@ class StorePage extends BasePage {
     // AGE VERIFICATION
     // ============================================================
 
-    getVerifyNowButton(localizedText = null) {
-        if (localizedText) {
-            return $(
-                `//*[@resource-id="verify-now-btn" or @content-desc="${localizedText}" or @text="${localizedText}"` +
-                ` or @content-desc="Verify now" or @text="Verify now"]`
-            );
-        }
-        return $(
-            '//*[@resource-id="verify-now-btn" or @content-desc="Verify now" or @text="Verify now"]'
-        );
-    }
-
     get verifyNowButton() {
-        return this.getVerifyNowButton();
-    }
-
-    getAgeVerificationTitle(localizedText = null) {
-        if (localizedText) {
-            return $(
-                `//*[@resource-id="age-verification-title" or @content-desc="age-verification-title"` +
-                ` or @text="${localizedText}" or @content-desc="${localizedText}"]`
-            );
-        }
-        return $('//*[@resource-id="age-verification-title" or @content-desc="age-verification-title"]');
+        return $('~Verify now');
     }
 
     get ageVerificationTitle() {
-        return this.getAgeVerificationTitle();
+        return $('~age-verification-title');
     }
 
-    async clickVerifyNow(localizedText = null) {
-        const btn = this.getVerifyNowButton(localizedText);
-        await btn.waitForDisplayed({
+    async clickVerifyNow() {
+        await this.verifyNowButton.waitForDisplayed({
             timeout: TIMEOUTS.SHORT
         });
 
-        await btn.click();
+        await this.verifyNowButton.click();
         await browser.pause(2500);
     }
 
@@ -456,43 +424,20 @@ class StorePage extends BasePage {
     // CONTACT STORE MANAGER
     // ============================================================
 
-    getContactManagerButton(localizedText = null) {
-        if (localizedText) {
-            return $(
-                `//*[@resource-id="contact-store-manager-btn" or @content-desc="${localizedText}" or @text="${localizedText}"` +
-                ` or @content-desc="Contact the store manager directly" or @text="Contact the store manager directly"]`
-            );
-        }
-        return $(
-            '//*[@resource-id="contact-store-manager-btn" or @content-desc="Contact the store manager directly" or @text="Contact the store manager directly"]'
-        );
-    }
-
     get contactManagerBtn() {
-        return this.getContactManagerButton();
-    }
-
-    getBookIdTitle(localizedText = null) {
-        if (localizedText) {
-            return $(
-                `//*[@resource-id="book-id-verification-title" or @content-desc="book-id-verification-title"` +
-                ` or @text="${localizedText}" or @content-desc="${localizedText}"]`
-            );
-        }
-        return $('//*[@resource-id="book-id-verification-title" or @content-desc="book-id-verification-title"]');
+        return $('~Contact the store manager directly');
     }
 
     get bookIdTitle() {
-        return this.getBookIdTitle();
+        return $('~book-id-verification-title');
     }
 
-    async clickContactStoreManager(localizedText = null) {
-        const btn = this.getContactManagerButton(localizedText);
-        await btn.waitForDisplayed({
+    async clickContactStoreManager() {
+        await this.contactManagerBtn.waitForDisplayed({
             timeout: TIMEOUTS.MEDIUM
         });
 
-        await btn.click();
+        await this.contactManagerBtn.click();
         await browser.pause(2500);
     }
 
@@ -500,32 +445,19 @@ class StorePage extends BasePage {
     // CALL THE SELLER
     // ============================================================
 
-    getCallTheSellerButton(localizedText = null) {
-        if (localizedText) {
-            return $(
-                `//*[@resource-id="call-seller-btn" or @content-desc="${localizedText}" or @text="${localizedText}"` +
-                ` or @content-desc="Call the Seller" or @text="Call the Seller"]`
-            );
-        }
-        return $(
-            '//*[@resource-id="call-seller-btn" or @content-desc="Call the Seller" or @text="Call the Seller"]'
-        );
-    }
-
     get callTheSellerButton() {
-        return this.getCallTheSellerButton();
+        return $('~Call the Seller');
     }
 
-    async getCallTheSellerButtonState(localizedText = null) {
-        const btn = this.getCallTheSellerButton(localizedText);
-        await btn.waitForDisplayed({
+    async getCallTheSellerButtonState() {
+        await this.callTheSellerButton.waitForDisplayed({
             timeout: TIMEOUTS.LONG
         });
 
-        const displayed = await btn.isDisplayed();
+        const displayed = await this.callTheSellerButton.isDisplayed();
 
         const clickable =
-            (await btn.getAttribute('clickable')) === 'true';
+            (await this.callTheSellerButton.getAttribute('clickable')) === 'true';
 
         return {
             displayed,

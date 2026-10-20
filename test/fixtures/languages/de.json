@@ -133,7 +133,16 @@
     "redeem": "Einlösen",
     "giftVoucher": "Geschenkgutschein",
     "redeemGiftVoucher": "Geschenkgutschein einlösen",
-    "balance": "Guthaben"
+    "balance": "Guthaben",
+    "walletHowItWorks": {
+      "title": "Wie funktioniert Wallet",
+      "messages": [
+        "Die Wallet zeigt dein aktuelles Guthaben und die zugehörigen Läden an.",
+        "Lade Guthaben auf deine Wallet, indem du Pfandartikel zurückgibst oder mit digitalen Zahlungsmethoden (inklusive Gutscheincodes) bezahlst.",
+        "Das Guthaben ist immer einem (oder mehreren) bestimmten Geschäften zugeordnet. Du erhältst und nutzt dein Wallet-Guthaben also immer bei diesen Geschäften.",
+        "Du kannst dein Guthaben entweder durch einen Einkauf im Geschäft nutzen oder es an deine Freunde und Familie senden."
+      ]
+    }
   },
   "activities": {
     "title": "Aktivitäten",

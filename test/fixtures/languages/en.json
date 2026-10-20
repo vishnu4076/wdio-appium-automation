@@ -65,6 +65,8 @@
     "cart": "Cart",
     "remove": "Remove",
     "removeFromFavorites": "Remove from favorites?",
+    "productAddedToFavorites": "Product added to favourites successfully.",
+    "productRemovedFromFavorites": "Product removed from favourites successfully.",
     "open": "Open",
     "closed": "Closed"
   },

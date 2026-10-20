@@ -5,38 +5,24 @@ const StorePage = require('../../pageobjects/store/StorePage');
 const { handlePermissions } = require('../permissions/permissionHandler');
 const userData = require('../../fixtures/testData/userData.json');
 
-const LanguagePage = require('../../pageobjects/onboarding/LanguagePage');
-
 /**
  * Reusable end-to-end authentication and store navigation helper
  * @param {Object} options
- * @param {string} [options.language] - Optional language code ('en', 'de', 'it', 'nl') or display name
- * @param {string} [options.country]
- * @param {string} [options.phoneNumber]
- * @param {string} [options.password]
+ * @param {string} options.language
+ * @param {string} options.country
+ * @param {string} options.phoneNumber
+ * @param {string} options.password
  */
 async function loginToStore(options = {}) {
     const {
-        language,
         country = userData.defaultUser.country,
         phoneNumber = userData.defaultUser.phoneNumber,
         password = userData.defaultUser.password
     } = options;
 
-    // 1. Onboarding & Language Selection
-    if (language) {
-        try {
-            await LanguagePage.selectLanguage(language);
-            await LanguagePage.confirmLanguage();
-        } catch (e) {
-            console.warn(`[authFlow] Language selection for "${language}" failed, falling back to default: ${e.message}`);
-            await OnboardingPage.selectEnglish();
-            await OnboardingPage.clickSelect();
-        }
-    } else {
-        await OnboardingPage.selectEnglish();
-        await OnboardingPage.clickSelect();
-    }
+    // 1. Onboarding
+    await OnboardingPage.selectEnglish();
+    await OnboardingPage.clickSelect();
     await OnboardingPage.clickIntroContinue();
     await OnboardingPage.skip();
 

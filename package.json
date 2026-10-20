@@ -10,7 +10,7 @@
     "test:auth": "wdio run ./config/wdio.android.conf.js --spec test/specs/authentication/**/*.js",
     "test:booking": "wdio run ./config/wdio.android.conf.js --spec test/specs/booking/**/*.js",
     "test:store": "wdio run ./config/wdio.android.conf.js --spec test/specs/store/**/*.js",
-    "test:age-verification": "wdio run ./config/wdio.android.conf.js --spec test/specs/age-verification/**/*.js",
+    "test:age-verification": "wdio run ./config/wdio.android.conf.js --spec ./test/specs/age-verification/ageRestrictionFlow.spec.js",
     "test:localization": "wdio run ./config/wdio.android.conf.js --spec test/specs/localization/**/*.js",
     "test:english": "wdio run ./config/wdio.android.conf.js --spec test/specs/localization/english-text.spec.js",
     "test:deutsch": "wdio run ./config/wdio.android.conf.js --spec test/specs/localization/deutsch-text.spec.js",
