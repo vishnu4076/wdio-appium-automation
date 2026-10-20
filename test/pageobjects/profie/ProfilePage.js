@@ -126,6 +126,9 @@ class ProfilePage extends BasePage {
     }
 
     async clickWallet() {
+        if (!(await this.walletButton.isDisplayed().catch(() => false))) {
+            await this.walletButton.scrollIntoView().catch(() => {});
+        }
         await this.clickElement(this.walletButton, TIMEOUTS.MEDIUM);
     }
 

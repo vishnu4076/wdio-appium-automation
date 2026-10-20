@@ -8,27 +8,64 @@ class BookingPage extends BasePage {
     // LOCATORS
     // =========================================================
 
-    get dateTimeButton() {
+    getDateTimeButton(localizedText = null) {
+        if (localizedText) {
+            return $(
+                `//*[@content-desc="${localizedText}" or @text="${localizedText}"]//android.widget.ImageView` +
+                ` | //*[@content-desc="${localizedText}" or @text="${localizedText}"]` +
+                ` | //android.view.ViewGroup[contains(@content-desc, "date") or contains(@content-desc, "time") or contains(@content-desc, "Datum")]/android.widget.ImageView`
+            );
+        }
         return $(
-            '//android.view.ViewGroup[@content-desc="Choose your preferred date and time."]/android.widget.ImageView'
+            '//android.view.ViewGroup[@content-desc="Choose your preferred date and time."]/android.widget.ImageView' +
+            ' | //android.view.ViewGroup[contains(@content-desc, "date") or contains(@content-desc, "time") or contains(@content-desc, "Datum")]/android.widget.ImageView'
+        );
+    }
+
+    get dateTimeButton() {
+        return this.getDateTimeButton();
+    }
+
+    getAvailableSlotsHeading(localizedText = null) {
+        if (localizedText) {
+            return $(
+                `//*[@resource-id="available-slots-header" or @text="${localizedText}" or @content-desc="${localizedText}"` +
+                ` or @text="Available slots" or @content-desc="Available slots"]`
+            );
+        }
+        return $(
+            '//*[@resource-id="available-slots-header" or @text="Available slots" or @content-desc="Available slots"]'
         );
     }
 
     get availableSlotsText() {
-        return $('//android.widget.TextView[@text="Available slots"]');
+        return this.getAvailableSlotsHeading();
+    }
+
+    getApplyButton(localizedText = null) {
+        if (localizedText) {
+            return $(
+                `//*[@resource-id="booking-apply-btn" or @text="${localizedText}" or @content-desc="${localizedText}"` +
+                ` or @text="Apply" or @content-desc="Apply"]`
+            );
+        }
+        return $(
+            '//*[@resource-id="booking-apply-btn" or @text="Apply" or @content-desc="Apply"]'
+        );
     }
 
     get applyButton() {
-        return $('//android.widget.TextView[@text="Apply"]');
+        return this.getApplyButton();
     }
 
     // =========================================================
     // DATE PICKER
     // =========================================================
 
-    async openDatePicker() {
-        await this.dateTimeButton.waitForDisplayed({ timeout: TIMEOUTS.MEDIUM });
-        await this.dateTimeButton.click();
+    async openDatePicker(localizedText = null) {
+        const btn = this.getDateTimeButton(localizedText);
+        await btn.waitForDisplayed({ timeout: TIMEOUTS.MEDIUM });
+        await btn.click();
         console.log('[BookingPage] Date picker opened');
     }
 
@@ -49,8 +86,9 @@ class BookingPage extends BasePage {
     // AVAILABLE SLOTS
     // =========================================================
 
-    async verifyAvailableSlots() {
-        await this.availableSlotsText.waitForDisplayed({ timeout: TIMEOUTS.MEDIUM });
+    async verifyAvailableSlots(localizedText = null) {
+        const heading = this.getAvailableSlotsHeading(localizedText);
+        await heading.waitForDisplayed({ timeout: TIMEOUTS.MEDIUM });
         console.log('[BookingPage] Available slots section is displayed');
     }
 
@@ -121,9 +159,10 @@ class BookingPage extends BasePage {
     // APPLY BOOKING
     // =========================================================
 
-    async clickApply() {
-        await this.applyButton.waitForDisplayed({ timeout: TIMEOUTS.MEDIUM });
-        await this.applyButton.click();
+    async clickApply(localizedText = null) {
+        const btn = this.getApplyButton(localizedText);
+        await btn.waitForDisplayed({ timeout: TIMEOUTS.MEDIUM });
+        await btn.click();
         console.log('[BookingPage] Apply button clicked');
     }
 
@@ -137,8 +176,9 @@ class BookingPage extends BasePage {
             await byAccId.waitForDisplayed({ timeout: TIMEOUTS.SHORT });
             return (await byAccId.getText()).trim();
         } catch (e) {
+            // Support Unicode letters for non-English month names like März (German), etc.
             const fallback = $(
-                'android=new UiSelector().className("android.widget.TextView").textMatches("^[A-Za-z]+ [0-9]{4}$")'
+                'android=new UiSelector().className("android.widget.TextView").textMatches("^[^0-9]+ [0-9]{4}$")'
             );
             await fallback.waitForDisplayed({ timeout: TIMEOUTS.MEDIUM });
             return (await fallback.getText()).trim();
@@ -229,14 +269,21 @@ class BookingPage extends BasePage {
     // NAVIGATE TO TARGET DATE MONTH
     // =========================================================
 
-    async navigateToDateMonth(dateString) {
+    async navigateToDateMonth(dateString, languageHelper = null) {
         const { year: targetYear, month: targetMonth } = DateHelper.parseYearMonth(dateString);
 
         for (let attempt = 0; attempt < 12; attempt++) {
             const displayedMonthYear = await this.getDisplayedMonthYear();
             const [monthName, year] = displayedMonthYear.split(' ');
             const displayedYear = Number(year);
-            const displayedMonth = new Date(`${monthName} 1, ${displayedYear}`).getMonth() + 1;
+
+            let displayedMonth;
+            if (languageHelper && typeof languageHelper.getMonthIndexFromLocalized === 'function') {
+                displayedMonth = languageHelper.getMonthIndexFromLocalized(monthName);
+            } else {
+                const parsedDate = new Date(`${monthName} 1, ${displayedYear}`);
+                displayedMonth = Number.isNaN(parsedDate.getTime()) ? NaN : parsedDate.getMonth() + 1;
+            }
 
             if (displayedYear === targetYear && displayedMonth === targetMonth) {
                 return true;
@@ -257,7 +304,7 @@ class BookingPage extends BasePage {
         return false;
     }
 
-    async validateBookingWindow() {
+    async validateBookingWindow(languageHelper = null) {
         const results = [];
 
         // Tomorrow (+1) through +15 should be available
@@ -265,7 +312,7 @@ class BookingPage extends BasePage {
             const date = DateHelper.getDateAfterDays(day);
             const dateString = DateHelper.formatDate(date);
 
-            await this.navigateToDateMonth(dateString);
+            await this.navigateToDateMonth(dateString, languageHelper);
             const available = await this.isDateAvailable(dateString);
 
             results.push({
@@ -279,7 +326,7 @@ class BookingPage extends BasePage {
         const dateAfter16 = DateHelper.getDateAfterDays(16);
         const dateString16 = DateHelper.formatDate(dateAfter16);
 
-        await this.navigateToDateMonth(dateString16);
+        await this.navigateToDateMonth(dateString16, languageHelper);
         const available16 = await this.isDateAvailable(dateString16);
 
         results.push({
@@ -291,7 +338,7 @@ class BookingPage extends BasePage {
         // Re-select tomorrow's date so subsequent tests can execute
         const tomorrow = DateHelper.getDateAfterDays(1);
         const tomorrowStr = DateHelper.formatDate(tomorrow);
-        await this.navigateToDateMonth(tomorrowStr);
+        await this.navigateToDateMonth(tomorrowStr, languageHelper);
         await this.selectAvailableDate(tomorrowStr);
 
         return results;

@@ -23,6 +23,7 @@ const LoginPage = require('../../pageobjects/authentication/LoginPage');
 const StorePage = require('../../pageobjects/store/StorePage');
 const ProfilePage = require('../../pageobjects/profie/ProfilePage');
 const InformationPage = require('../../pageobjects/profie/InformationPage');
+const WalletPage = require('../../pageobjects/profie/WalletPage');
 
 const { handlePermissions } = require('../../utils/permissions/permissionHandler');
 const LocalizationValidator = require('../../utils/localization/LocalizationValidator');
@@ -690,6 +691,64 @@ describe('English Localization E2E Verification', function () {
             expect(actual.answer).toBe(expected.answer);
         }
 
-    });
+        await InformationPage.clickBackButtonInfo();
+        await InformationPage.clickBackToProfile();
+
+        // ============================================================
+        // 11. WALLET
+        // ============================================================
+
+        validator.printSection('Wallet');
+
+        await ProfilePage.profileTitle.waitForDisplayed({ timeout: 15000 });
+        await ProfilePage.clickWallet();
+
+        await WalletPage.dismissTourIfPresent();
+
+        // ── Verify How It Works Popup ──────────────────────────────
+        const expectedWalletHowItWorks = enData.wallet && enData.wallet.walletHowItWorks;
+
+        if (expectedWalletHowItWorks) {
+            await WalletPage.clickHowItWorksButton();
+
+            // Heading assertion
+            const actualHeading = await WalletPage.getHowItWorksHeading();
+            validator.logResult(
+                expectedWalletHowItWorks.title,
+                actualHeading,
+                actualHeading === expectedWalletHowItWorks.title ? 'PASS' : 'FAIL'
+            );
+            expect(actualHeading).toBe(expectedWalletHowItWorks.title);
+
+            // Four messages assertion
+            const actualMessages = await WalletPage.getHowItWorksMessages();
+            const expectedMessages = expectedWalletHowItWorks.messages || [];
+
+            validator.logResult(
+                'Wallet How It Works message count',
+                `${actualMessages.length}/${expectedMessages.length}`,
+                actualMessages.length === expectedMessages.length ? 'PASS' : 'FAIL'
+            );
+            expect(actualMessages.length).toBe(expectedMessages.length);
+
+            for (let i = 0; i < expectedMessages.length; i++) {
+                const expectedMsg = expectedMessages[i];
+                const actualMsg   = actualMessages[i] || '';
+
+                validator.logResult(
+                    `Wallet Message ${i + 1}`,
+                    actualMsg,
+                    actualMsg === expectedMsg ? 'PASS' : 'FAIL'
+                );
+                expect(actualMsg).toBe(expectedMsg);
+            }
+
+            // Close popup
+            await WalletPage.clickCloseWalletHowItWorksButton();
+        }
+
+        // ── Back to Profile ─────────────────────────────────────────
+        await WalletPage.clickBackButton();
+        await ProfilePage.profileTitle.waitForDisplayed({ timeout: 15000 });
 
 });

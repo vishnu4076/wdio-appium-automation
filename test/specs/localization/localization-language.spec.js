@@ -23,6 +23,8 @@
  *                               full screen-text scan + untranslated-English guard
  *   9.  Information            – information tile navigation
  *  10.  FAQ                    – item count + every question / answer pair
+ *  11.  Wallet                 – wallet navigation, how it works popup (heading + 4 messages),
+ *                               popup close, back to profile navigation
  *
  * Source of truth: test/fixtures/languages/<LANGUAGE>.json
  *
@@ -45,6 +47,7 @@ const LoginPage         = require('../../pageobjects/authentication/LoginPage');
 const StorePage         = require('../../pageobjects/store/StorePage');
 const ProfilePage       = require('../../pageobjects/profie/ProfilePage');
 const InformationPage   = require('../../pageobjects/profie/InformationPage');
+const WalletPage        = require('../../pageobjects/profie/WalletPage');
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
 const { handlePermissions }  = require('../../utils/permissions/permissionHandler');
@@ -107,7 +110,7 @@ try {
 
 describe(`Lokbest Localization E2E – ${langDisplayName} (${langCode.toUpperCase()})`, function () {
 
-    this.timeout(400000);
+    this.timeout(600000);
 
     /** Shared validator constructed with the dynamically loaded fixture. */
     const validator = new LocalizationValidator(languageData);
@@ -526,7 +529,7 @@ describe(`Lokbest Localization E2E – ${langDisplayName} (${langCode.toUpperCas
 
         await InformationPage.clickFaqTile();
 
-        const actualFaqItems = await InformationPage.getAllFaqItems();
+        const actualFaqItems = await InformationPage.getAllFaqItems(expectedFaqItems.length);
 
         // Count assertion
         validator.logResult(
@@ -555,7 +558,75 @@ describe(`Lokbest Localization E2E – ${langDisplayName} (${langCode.toUpperCas
             );
             expect(actual.answer).toBe(expected.answer);
         }
+        await InformationPage.clickBackButtonInfo();
+        await InformationPage.clickBackToProfile();
 
+        // ============================================================
+        // 11. WALLET
+        // ============================================================
+
+        validator.printSection('Wallet');
+
+        await ProfilePage.profileTitle.waitForDisplayed({ timeout: 15000 });
+        await ProfilePage.clickWallet();
+
+        await WalletPage.dismissTourIfPresent();
+
+        // ── Verify How It Works Popup ──────────────────────────────
+        const expectedWalletHowItWorks = (languageData.wallet && languageData.wallet.walletHowItWorks)
+            ? languageData.wallet.walletHowItWorks
+            : null;
+
+        if (!expectedWalletHowItWorks) {
+            console.warn(
+                `[localization-language.spec] WARNING: No "wallet.walletHowItWorks" found in ` +
+                `fixtures/languages/${fixtureFile}.json for language "${langCode.toUpperCase()}". ` +
+                `Wallet How It Works popup assertions are SKIPPED.`
+            );
+        } else {
+            await WalletPage.clickHowItWorksButton();
+
+            // Heading assertion
+            const actualHeading = await WalletPage.getHowItWorksHeading();
+            validator.logResult(
+                expectedWalletHowItWorks.title,
+                actualHeading,
+                actualHeading === expectedWalletHowItWorks.title ? 'PASS' : 'FAIL'
+            );
+            expect(actualHeading).toBe(expectedWalletHowItWorks.title);
+
+            // Four messages assertion
+            const actualMessages = await WalletPage.getHowItWorksMessages();
+            const expectedMessages = expectedWalletHowItWorks.messages || [];
+
+            validator.logResult(
+                'Wallet How It Works message count',
+                `${actualMessages.length}/${expectedMessages.length}`,
+                actualMessages.length === expectedMessages.length ? 'PASS' : 'FAIL'
+            );
+            expect(actualMessages.length).toBe(expectedMessages.length);
+
+            for (let i = 0; i < expectedMessages.length; i++) {
+                const expectedMsg = expectedMessages[i];
+                const actualMsg   = actualMessages[i] || '';
+
+                validator.logResult(
+                    `Wallet Message ${i + 1}`,
+                    actualMsg,
+                    actualMsg === expectedMsg ? 'PASS' : 'FAIL'
+                );
+                expect(actualMsg).toBe(expectedMsg);
+            }
+
+            // Close popup
+            await WalletPage.clickCloseWalletHowItWorksButton();
+        }
+
+        // ── Back to Profile ─────────────────────────────────────────
+        await WalletPage.clickBackButton();
+        await ProfilePage.profileTitle.waitForDisplayed({ timeout: 15000 });
+
+        
     });
 
 });

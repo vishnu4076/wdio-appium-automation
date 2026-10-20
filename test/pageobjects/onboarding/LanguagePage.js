@@ -6,6 +6,11 @@ const languageDisplayNames = {
     Deutsch: 'Deutsch',
     English: 'English',
     Italiano: 'Italiano',
+    Nederlands: 'Nederlands',
+    de: 'Deutsch',
+    en: 'English',
+    it: 'Italiano',
+    nl: 'Nederlands',
 };
 
 // Resource-id based index map (used as primary strategy)
@@ -13,13 +18,18 @@ const languageIds = {
     Deutsch: 'language-sheet-language-option-0',
     English: 'language-sheet-language-option-1',
     Italiano: 'language-sheet-language-option-2',
+    Nederlands: 'language-sheet-language-option-3',
+    de: 'language-sheet-language-option-0',
+    en: 'language-sheet-language-option-1',
+    it: 'language-sheet-language-option-2',
+    nl: 'language-sheet-language-option-3',
 };
 
 class LanguagePage extends BasePage {
     getLanguageOption(language) {
         const resourceId = languageIds[language];
         if (!resourceId) {
-            throw new Error(`Unsupported language: ${language}`);
+            return $(`~${language}`);
         }
         return $(`android=new UiSelector().resourceId("${resourceId}")`);
     }

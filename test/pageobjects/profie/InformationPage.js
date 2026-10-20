@@ -47,6 +47,27 @@ class InformationPage extends BasePage {
         return $(`//*[@resource-id="${faqItemId}"]/following-sibling::android.widget.TextView[2]`);
     }
 
+    get backButtonInfo() {
+        return $('android=new UiSelector().resourceId("header-back-btn")');
+    }
+
+    async clickBackButtonInfo() {
+        await this.backButtonInfo.waitForDisplayed({ timeout: 10000 });
+        await this.backButtonInfo.click();
+        await this.faqTile.waitForDisplayed({ timeout: 10000 });
+        await browser.pause(500);
+    }
+
+    get backButton() {
+        return $('android=new UiSelector().resourceId("header-back-btn")');
+    }
+
+    async clickBackToProfile() {
+        await this.backButton.waitForDisplayed({ timeout: 10000 });
+        await this.backButton.click();
+        await browser.pause(800);
+    }
+
     async getFaqQuestionText(faqItemId) {
         // Prioritize sibling (DOM confirmed: TextView is sibling of faq-item-*)
         const sibling = this.getFaqQuestion(faqItemId);
